@@ -1,7 +1,7 @@
-import { Request,Response } from "express"
 import User from "../model/User.js";
 import jwt from "jsonwebtoken";
 import TryCatch from "../middlewares/trycatch.js";
+
 
 export const loginUser = TryCatch(async (req,res) => {
         const {email,name,picture} = req.body;
@@ -27,3 +27,4 @@ export const loginUser = TryCatch(async (req,res) => {
         })
 
 })
+
