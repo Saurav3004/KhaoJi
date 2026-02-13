@@ -30,6 +30,7 @@ export const loginUser = TryCatch(async (req,res) => {
 
 const allowedRoles = ["customer","rider","seller"] as const;
 type Role = (typeof allowedRoles)[number];
+
 export const addUserRole = TryCatch(async (req:AuthenticatedRequest,res) => {
     if(!req.user?._id){
         return res.status(401).json({
@@ -56,4 +57,10 @@ export const addUserRole = TryCatch(async (req:AuthenticatedRequest,res) => {
     });
 
     res.json({user,token});
+});
+
+
+export const myProfile = TryCatch(async (req:AuthenticatedRequest,res) => {
+    const user = req.user
+    res.json({user})
 })
