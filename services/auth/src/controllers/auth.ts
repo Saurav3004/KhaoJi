@@ -16,7 +16,7 @@ export const loginUser = TryCatch(async (req,res) => {
             })
         }
 
-        const token = jwt.sign({user},process.env.JWT_SEC!,{
+        const token = jwt.sign({user},process.env.JWT_SEC as string,{
             expiresIn: "15d"
         });
 
