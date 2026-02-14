@@ -16,9 +16,13 @@ const Login = () => {
       });
 
       localStorage.setItem("token",result.data.token);
-      toast
+      toast.success(result.data.message);
+      setLoading(false)
+      navigate("/")
     } catch (error) {
-      
+      console.log(error);
+      toast.error("Problem while logging");
+      setLoading(false);
     }
   }
   return (
