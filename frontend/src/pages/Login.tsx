@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { authService } from "../main";
 import toast from "react-hot-toast";
+import {GoogleLogin} from "@react-oauth/google"
 
 const Login = () => {
   const [loading,setLoading] = useState(false);
@@ -19,7 +20,9 @@ const Login = () => {
       toast.success(result.data.message);
       setLoading(false)
       navigate("/")
+
     } catch (error) {
+
       console.log(error);
       toast.error("Problem while logging");
       setLoading(false);
