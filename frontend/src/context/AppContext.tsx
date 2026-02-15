@@ -1,15 +1,16 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { authService } from "../main";
+import type { AppContextType, User } from "../types";
 
-const AppContext = createContext(undefined)
+const AppContext = createContext<AppContextType | undefined>(undefined)
 
 interface AppProviderProps {
     children: React.ReactNode;
 }
 
 export const AppProvider = ({children}:AppProviderProps) => {
-    const [user,setUser] = useState(null);
+    const [user,setUser] = useState<User | null>(null);
     const [isAuth,setIsAuth] = useState(false);
     const [loading,setLoading] = useState(true);
 
@@ -38,5 +39,14 @@ export const AppProvider = ({children}:AppProviderProps) => {
         fetchUser()
     },[])
 
-    return (<AppContext.Provider value={{}}>{children}</AppContext.Provider>)
+    return (<AppContext.Provider value={{isAuth,loading,setIsAuth,setUser,setLoading,user}}>{children}</AppContext.Provider>)
+};
+
+export const useAppData = ():AppContextType => {
+    const context = useContext(AppContext);
+    if(!context){
+        throw new Error("useAppData must be used with in AppProvider");
+    }
+
+    return context;
 }
