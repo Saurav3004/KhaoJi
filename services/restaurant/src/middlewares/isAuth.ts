@@ -46,3 +46,7 @@ export const isAuth = async (req:AuthenticatedRequest,res:Response,next:NextFunc
             })
     }
 }
+
+export const isSeller = async (req:AuthenticatedRequest,res:Response,next:NextFunction) => {
+    
+}
