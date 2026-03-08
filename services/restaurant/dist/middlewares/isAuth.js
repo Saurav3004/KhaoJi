@@ -30,3 +30,13 @@ export const isAuth = async (req, res, next) => {
         });
     }
 };
+export const isSeller = async (req, res, next) => {
+    const user = req.user;
+    if (!user || user.role !== "seller") {
+        res.status(401).json({
+            message: "You are not authorized seller"
+        });
+        return;
+    }
+    next();
+};
